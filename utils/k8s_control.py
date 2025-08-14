@@ -23,7 +23,7 @@ def scale_deployment(replica_count, target_node=None):
         body = {"spec": {"replicas": replica_count}}
 
     apps_v1.patch_namespaced_deployment(
-        name="productpage",           # ← nginx deployment 이름
+        name="productpage",
         namespace="bookinfo",   # ← 네임스페이스 변경
         body=body
     )

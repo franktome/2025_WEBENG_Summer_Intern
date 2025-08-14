@@ -8,7 +8,7 @@ import numpy as np
 
 env = CentralEnv()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-agent = DQNAgent(state_dim=4, action_dim=5, device=device)
+agent = DQNAgent(state_dim=3, action_dim=8, device=device)
 buffer = ReplayBuffer(10000)
 
 epsilon = 1.0
@@ -31,9 +31,9 @@ for episode in range(1000):
         buffer.push(state, action, reward, next_state, done)
         state = next_state
         total_reward += reward
-        time.sleep(5)
+        time.sleep(15)
 
-        if len(buffer) > batch_size:
+        if len(buffer) >= batch_size:
             batch = buffer.sample(batch_size)
             loss = agent.update(batch, buffer, batch_size)
             losses.append(loss)
